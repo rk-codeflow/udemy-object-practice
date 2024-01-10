@@ -22,18 +22,21 @@ addMovieBtn.addEventListener("click", () => {
   console.dir(movieObject);
   console.dir(movies);
 
-  movies.forEach((movie) => {
-    console.log("Movie title", movie.title);
-  });
-
   showMovieList();
 });
 
 const showMovieList = () => {
   const movieList = document.getElementById("movie-list");
   const listItem = document.createElement("li");
-  listItem.textContent = "hi";
-  movieList.append(listItem);
-  console.log(listItem);
-  movieList.classList.add("visible");
+
+  if (movies.length === 0) {
+    movieList.classList.remove("visible");
+  } else {
+    movieList.classList.add("visible");
+  }
+
+  movies.forEach((movie) => {
+    listItem.textContent = `${movie.title} - ${movie.extra.name} (${movie.extra.value})`;
+    movieList.append(listItem);
+  });
 };
