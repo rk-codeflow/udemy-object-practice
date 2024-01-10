@@ -40,3 +40,12 @@ const showMovieList = () => {
     movieList.append(listItem);
   });
 };
+
+const filterData = () => {
+  const filterTitle = document.getElementById("filter-title").value;
+  movies.filter((val) => {
+    console.log(val.title);
+  });
+};
+
+searchBtn.addEventListener("click", filterData);
