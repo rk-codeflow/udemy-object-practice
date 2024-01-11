@@ -19,8 +19,8 @@ addMovieBtn.addEventListener("click", () => {
   };
 
   movies.push(movieObject);
-  console.dir(movieObject);
-  console.dir(movies);
+  // console.dir(movieObject);
+  // console.dir(movies);
 
   showMovieList();
 });
@@ -38,14 +38,12 @@ const showMovieList = () => {
   movies.forEach((movie) => {
     listItem.textContent = `${movie.title} - ${movie.extra.name} (${movie.extra.value})`;
     movieList.append(listItem);
+    console.log(listItem);
   });
 };
 
 const filterData = () => {
   const filterTitle = document.getElementById("filter-title").value;
-  movies.filter((val) => {
-    console.log(val.title);
-  });
 };
 
 searchBtn.addEventListener("click", filterData);
