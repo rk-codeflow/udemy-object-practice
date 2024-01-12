@@ -2,12 +2,12 @@ const addMovieBtn = document.getElementById("add-movie-btn");
 const searchBtn = document.getElementById("search-btn");
 
 const movies = [];
+
 addMovieBtn.addEventListener("click", () => {
   // Get values from input fields
   const movieTitle = document.getElementById("title").value;
   const extraName = document.getElementById("extra-name").value;
   const extraValue = document.getElementById("extra-value").value;
-  // console.log(movieTitle, extraName, extraValue);
 
   // Create an object
   const movieObject = {
@@ -19,31 +19,33 @@ addMovieBtn.addEventListener("click", () => {
   };
 
   movies.push(movieObject);
-  // console.dir(movieObject);
-  // console.dir(movies);
 
   showMovieList();
 });
 
+// Render movie list
 const showMovieList = () => {
   const movieList = document.getElementById("movie-list");
-  const listItem = document.createElement("li");
+  const filterTitle = document.getElementById("filter-title").value;
 
+  movieList.innerHTML = ""; // Clear previous list items
+
+  // show the movielist wrapper if there are movies, otherwise hide it.
   if (movies.length === 0) {
     movieList.classList.remove("visible");
   } else {
     movieList.classList.add("visible");
   }
 
-  movies.forEach((movie) => {
-    listItem.textContent = `${movie.title} - ${movie.extra.name} (${movie.extra.value})`;
-    movieList.append(listItem);
-    console.log(listItem);
-  });
+  movies
+    .filter((movie) => movie.title.includes(filterTitle))
+    .forEach((movie) => {
+      const listItem = document.createElement("li");
+      listItem.textContent = `${movie.title} - ${movie.extra.name} (${movie.extra.value})`;
+      movieList.append(listItem);
+    });
 };
 
-const filterData = () => {
-  const filterTitle = document.getElementById("filter-title").value;
-};
-
-searchBtn.addEventListener("click", filterData);
+searchBtn.addEventListener("click", () => {
+  showMovieList();
+});
